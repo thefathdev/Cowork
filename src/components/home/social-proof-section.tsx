@@ -28,14 +28,14 @@ const companies: Company[] = [
 
 export default function SocialProofSection() {
   return (
-    <section className="px-4 py-8 bg-white">
+    <section className="px-4 py-8 max-sm:py-12 bg-white max-sm:overflow-x-hidden">
       <div className="flex flex-col items-center gap-6">
         <h2 className="subtitle text-flexing-blue">
           Trusted by Leading Companies
         </h2>
-        <div className="flex justify-center gap-12">
+        <div className="flex justify-center max-sm:justify-start gap-12 max-sm:w-full">
           {companies.map((company, index) => (
-            <div key={index} className="flex items-center">
+            <div key={index} className="flex items-center max-sm:flex-none">
               <img src={company.logo} alt={company.name} />
             </div>
           ))}

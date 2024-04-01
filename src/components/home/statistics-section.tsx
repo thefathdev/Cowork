@@ -18,7 +18,7 @@ const statistics: Statistics[] = [
 
 export default function StatisticsSection() {
   return (
-    <section className="relative flex px-4 py-[55vw] items-center gap-8">
+    <section className="relative flex px-4 py-[820px] items-center gap-8 max-sm:pt-[480px] max-sm:pb-18 max-sm:flex-col overflow-x-hidden">
       <div className="relative z-10 flex flex-col w-full gap-8 text-flexing-blue">
         <div className="flex flex-col gap-4">
           <p className="subtitle ">Cowork in Numbers</p>
@@ -38,7 +38,7 @@ export default function StatisticsSection() {
           ))}
         </div>
       </div>
-      <div className="relative z-10 w-full max-h-[640px] max-w-[640px] h-screen overflow-hidden rounded-[2rem]">
+      <div className="relative z-10 w-full max-h-[640px] max-sm:max-h-[320px] max-w-[640px] h-screen overflow-hidden rounded-[2rem]">
         <img
           src="/img/statistics.jpg"
           alt=""
@@ -46,7 +46,7 @@ export default function StatisticsSection() {
         />
       </div>
       {/* Decoration */}
-      <div className="absolute w-screen rounded-full aspect-square bg-tammed-yellow border-[5px] border-dashed border-flexing-blue -translate-x-1/4 "></div>
+      <div className="absolute w-[1600px] max-sm:w-[1240px] rounded-full aspect-square bg-tammed-yellow border-[5px] border-dashed border-flexing-blue -translate-x-1/4 max-sm:-translate-y-[40%]"></div>
     </section>
   );
 }

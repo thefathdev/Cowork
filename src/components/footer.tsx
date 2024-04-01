@@ -3,14 +3,18 @@ import Button from "./ui/button";
 export default function Footer() {
   return (
     <footer className="flex flex-col px-4 py-8">
-      <div className="flex items-center justify-between rounded-[2rem] py-12 px-8  gap-32 paragraph-thin bg-rigid-black text-clear-white">
+      <div className="flex items-center justify-between rounded-[2rem] py-12 px-8 max-sm:p-12 max-sm:flex-col  gap-32 max-sm:gap-10 paragraph-thin bg-rigid-black text-clear-white">
         <div className="w-full max-w-[500px] gap-8 flex flex-col">
-          <img src="/logo-white.svg" alt="" className="h-6 self-start" />
-          <div className="flex flex-col gap-6">
+          <img
+            src="/logo-white.svg"
+            alt=""
+            className="h-6 self-start max-sm:self-center"
+          />
+          <div className="flex flex-col gap-6 max-sm:text-center">
             <p>
               Join our newsletter to stay up to date on features and releases.
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-6 max-sm:flex-col max-sm:gap-4">
               <input
                 type="text"
                 placeholder="Enter your email"
@@ -24,10 +28,10 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-20 w-full">
-          <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-3 gap-20 max-sm:gap-6 w-full max-sm:grid-cols-1">
+          <div className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
             <p className="paragraph-strong uppercase">Explore More</p>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
               <li>
                 <a href="/">Home</a>
               </li>
@@ -45,9 +49,9 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
             <p className="paragraph-strong uppercase">Stay Connected</p>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
               <li>
                 <a href="/">Subscribe</a>
               </li>
@@ -62,9 +66,9 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
             <p className="paragraph-strong uppercase">Follow Us</p>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-6 max-sm:gap-2 max-sm:items-center">
               <li>
                 <a href="/">Facebook</a>
               </li>

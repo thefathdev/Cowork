@@ -12,15 +12,15 @@
 
   /* Text Styles */
   .heading-1 {
-    @apply font-neue-regrade font-bold text-8xl uppercase -tracking-[1%] leading-[100%];
+    @apply font-neue-regrade font-bold text-8xl uppercase -tracking-[1%] leading-[100%] max-sm:text-5xl max-sm:tracking-[0%] max-sm:leading-[120%];
   }
 
   .heading-2 {
-    @apply font-neue-regrade font-bold text-5xl leading-[120%];
+    @apply font-neue-regrade font-bold text-5xl leading-[120%] max-sm:text-[2rem] max-sm:leading-[150%];
   }
 
   .heading-3 {
-    @apply font-neue-regrade uppercase font-bold text-2xl leading-[140%];
+    @apply font-neue-regrade uppercase font-bold text-2xl leading-[140%] max-sm:text-base max-sm:leading-[140%];
   }
 
   .heading-4 {

@@ -53,9 +53,9 @@ const testimonies: Testimonial[] = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="flex flex-col px-4 py-18">
-      <div className="flex flex-col rounded-[2rem] gap-8 bg-rigid-black">
-        <div className="grid items-end w-full grid-cols-12 gap-4 p-8 pt-18 text-clear-white">
+    <section className="flex flex-col px-4 py-18 max-sm:py-12">
+      <div className="flex flex-col rounded-[2rem] max-sm:rounded-[1.5rem] gap-8 max-sm:gap-6 bg-rigid-black">
+        <div className="grid items-end w-full grid-cols-12 gap-4 p-8 pt-18 text-clear-white max-sm:flex max-sm:flex-col max-sm:p-6 max-sm:items-start">
           <h2 className="sr-only">Virtual Tour</h2>
           <div className="flex flex-col col-span-9 heading-1 ">
             <span className="flex items-end gap-4">
@@ -64,24 +64,23 @@ export default function TestimonialsSection() {
                 aria-hidden
                 src="/img/testimonials-icon.svg"
                 alt=""
-                className="-translate-y-[10px]"
+                className="-translate-y-[10px] max-sm:scale-50 max-sm:translate-y-[5px] max-sm:-translate-x-[20px]"
               />
             </span>
             <span>Our Client</span>
           </div>
-          <div className="flex flex-col col-span-3 gap-2 ml-auto text-clear-white">
+          <div className="flex flex-col col-span-3 gap-2 ml-auto text-clear-white max-sm:ml-0">
             <div className="h-[1px] w-[200px] bg-clear-white"></div>
             <p className="heading-3">Cowork in Words</p>
           </div>
         </div>
-        <div className="w-full h-[860px] overflow-hidden relative flex flex-col items-center">
+        <div className="w-full h-[860px] overflow-hidden relative flex flex-col items-center max-sm:hidden">
           {testimonies.map((testimony, index) => (
             <div
               key={index}
               className={"absolute w-[360px] top-0 " + testimony.coord}
             >
               <TestimonialCard
-                key={index}
                 name={testimony.name}
                 position={testimony.position}
                 image={testimony.image}
@@ -90,6 +89,31 @@ export default function TestimonialsSection() {
               />
             </div>
           ))}
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-end gap-4">
+            <button>
+              <span className="sr-only">Previous</span>
+            </button>
+            <button>
+              <span className="sr-only">Next</span>
+            </button>
+          </div>
+          <div className="flex gap-6 overflow-x-scroll pb-6">
+            <div aria-hidden className="w-6"></div>
+            {testimonies.map((testimony, index) => (
+              <div key={index} className="min-w-[300px]">
+                <TestimonialCard
+                  name={testimony.name}
+                  position={testimony.position}
+                  image={testimony.image}
+                  text={testimony.text}
+                  variant={testimony.variant}
+                />
+              </div>
+            ))}
+            <div aria-hidden className="w-6"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -124,7 +148,7 @@ function TestimonialCard({
   return (
     <div
       className={
-        "flex flex-col items-center gap-6 p-8 rounded-[1.5rem]" +
+        "flex flex-col items-center gap-6 p-8 rounded-[1.5rem] max-sm:rounded-[1rem] max-sm:py-4 max-sm:px-6 max-sm:w-full" +
         " " +
         testimonialCardVariant({ variant })
       }

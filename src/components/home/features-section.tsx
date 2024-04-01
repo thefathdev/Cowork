@@ -27,22 +27,22 @@ const features: Feature[] = [
 
 export default function FeaturesSection() {
   return (
-    <section className="flex flex-col items-center gap-20 px-4 py-18">
+    <section className="flex flex-col items-center gap-20 px-4 py-18 max-sm:py-12 max-sm:gap-8">
       {/* Title */}
       <div>
         <h2 className="sr-only">Why Choose Cowork?</h2>
-        <div className="flex flex-wrap gap-x-3 heading-2">
+        <div className="flex flex-wrap gap-x-3 heading-2 max-sm:justify-center">
           <span>Why Choose</span>
           <img
             src="/img/feature-in-text.jpg"
             alt=""
-            className="w-[180px] rounded-full"
+            className="w-[180px] rounded-full max-sm:w-[120px]"
           />
           <span>Cowork?</span>
         </div>
       </div>
       {/* Features */}
-      <div className="grid w-full grid-cols-3 gap-4">
+      <div className="grid w-full grid-cols-3 gap-4 max-sm:grid-cols-1">
         {features.map((feature, index) => (
           <div
             key={index}

@@ -30,29 +30,29 @@ const blogs: BlogPost[] = [
 
 export default function BlogSection() {
   return (
-    <section className="flex flex-col items-center gap-12 px-4 py-18">
+    <section className="flex flex-col items-center gap-12 px-4 py-18 max-sm:py-12">
       {/* Title */}
       <div className="flex flex-col items-center gap-4">
         <p className="subtitle text-flexing-blue">Cowork Chronicles</p>
         <h2 className="sr-only">Insight, Innovation, and Inspiration</h2>
         <div
           aria-hidden
-          className="flex flex-wrap justify-center gap-x-3 gap-y-1 heading-2 max-w-[640px]"
+          className="flex flex-wrap justify-center gap-x-3 gap-y-1 heading-2 max-w-[640px] max-sm:gap-y-0"
         >
           <span>Insights, Innovation, and </span>
           <img
             src="/img/blog-in-text.jpg"
             alt=""
-            className="w-[180px] rounded-full"
+            className="w-[180px] rounded-full max-sm:w-[120px]"
           />
           <span>Inspiration</span>
         </div>
       </div>
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-16 max-sm:gap-8">
         {/* Blogs */}
-        <div className="grid w-full grid-cols-3 gap-4">
+        <div className="grid w-full grid-cols-3 gap-4 max-sm:flex max-sm:flex-col max-sm:gap-8">
           {blogs.map((blog, index) => (
-            <article key={index} className="flex flex-col gap-6">
+            <article key={index} className="flex flex-col gap-6 max-sm:gap-4">
               <img
                 src={blog.img}
                 alt=""
