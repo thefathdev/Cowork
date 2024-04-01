@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Container */
+  .main-container > * {
+    max-width: 1440px;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  /* Text Styles */
+  .heading-1 {
+    @apply font-neue-regrade font-bold text-8xl uppercase -tracking-[1%] leading-[100%];
+  }
+
+  .heading-2 {
+    @apply font-neue-regrade font-bold text-5xl leading-[120%];
+  }
+
+  .heading-3 {
+    @apply font-neue-regrade uppercase font-bold text-2xl leading-[140%];
+  }
+
+  .heading-4 {
+    @apply font-neue-regrade font-bold text-base leading-[150%];
+  }
+
+  .subtitle {
+    @apply font-general-sans font-semibold uppercase text-xs leading-[150%];
+  }
+
+  .paragraph {
+    @apply font-general-sans text-base font-medium leading-[150%];
+  }
+
+  .paragraph-strong {
+    @apply font-general-sans text-base font-semibold leading-[150%];
+  }
+
+  .paragraph-small {
+    @apply font-general-sans text-xs font-normal leading-[150%];
+  }
+
+  .paragraph-thin {
+    @apply font-general-sans text-base font-light leading-[150%];
+  }
+}
