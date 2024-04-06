@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${neueRegrade.variable} ${generalSans.variable}  paragraph text-humble-black bg-pure-white relative flex flex-col`}
+        className={`${neueRegrade.variable} ${generalSans.variable}  paragraph text-humble-black bg-pure-white relative flex flex-col overflow-x-hidden`}
       >
         {/* Navbar */}
         <Navbar />

@@ -1,9 +1,38 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Button from "../ui/button";
 
 export default function CtaSection() {
   return (
     <section className="flex flex-col px-4 py-18 max-sm:py-12">
-      <div className="flex flex-col items-center rounded-[2rem] py-18 px-8 max-sm:p-6 max-sm:rounded-[1.5rem] gap-12 bg-rigid-black">
+      <motion.div
+        style={{
+          transformOrigin: "100% 0",
+          perspective: "1000px",
+          transformStyle: "preserve-3d",
+        }}
+        initial={{
+          rotateX: 10,
+          rotateY: 10,
+          opacity: 0,
+        }}
+        whileInView={{
+          rotateX: 0,
+          rotateY: 0,
+          opacity: 1,
+        }}
+        viewport={{
+          once: true,
+          margin: "-400px",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 60,
+        }}
+        className="flex flex-col items-center rounded-[2rem] py-18 px-8 max-sm:p-6 max-sm:rounded-[1.5rem] gap-12 bg-rigid-black"
+      >
         <div className="flex flex-col gap-6 items-center">
           <h2 className="sr-only">Seize The Moment - Join Cowork Today!</h2>
           <div
@@ -29,7 +58,7 @@ export default function CtaSection() {
         <Button size={"big"} type={"accent"}>
           Claim Your Spot
         </Button>
-      </div>
+      </motion.div>
     </section>
   );
 }

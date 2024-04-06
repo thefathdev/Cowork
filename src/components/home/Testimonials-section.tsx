@@ -1,4 +1,7 @@
+"use client";
+
 import { cva } from "class-variance-authority";
+import { motion } from "framer-motion";
 
 type Testimonial = {
   name: string;
@@ -16,7 +19,7 @@ const testimonies: Testimonial[] = [
     image: "/img/testimonial-1.png",
     text: "The 24/7 access and secure facilities have been incredibly convenient for my team's flexible schedules. We love the coworking space!",
     variant: "primary",
-    coord: "-translate-x-[calc(100%+60px)] translate-y-[30px]",
+    coord: "translateX(calc(calc(100% + 60px) * -1)) translateY(30px)",
   },
   {
     name: "Michael Rodriguez",
@@ -24,6 +27,7 @@ const testimonies: Testimonial[] = [
     image: "/img/testimonial-2.png",
     text: "The aesthetics of Cowork are inspiring. The attention to detail in the design creates an atmosphere that sparks creativity. It's a place where ideas flow effortlessly, and collaboration happens organically.",
     variant: "secondary",
+    coord: "translateX(0) translateY(0)",
   },
   {
     name: "Michael Thompson",
@@ -31,7 +35,7 @@ const testimonies: Testimonial[] = [
     image: "/img/testimonial-3.png",
     text: "As a freelance designer, I was getting tired of working from home or coffee shops. The coworking space has provided me with a productive and professional environment to focus on my work.",
     variant: "primary",
-    coord: "translate-x-[calc(100%+60px)] translate-y-[40px]",
+    coord: "translateX(calc(100% + 60px)) translateY(40px)",
   },
   {
     name: "David Wilson",
@@ -39,7 +43,8 @@ const testimonies: Testimonial[] = [
     image: "/img/testimonial-4.png",
     text: "The coworking space has been a wonderful resource for my team. The open floor plan and dedicated private offices allow us to collaborate and concentrate as needed.",
     variant: "secondary",
-    coord: "-translate-x-[calc(50%+60px)] translate-y-[calc(100%+75px)]",
+    coord:
+      "translateX(calc(calc(50% + 60px) * -1 )) translateY(calc(100% + 75px))",
   },
   {
     name: "Alex Nguyen",
@@ -47,13 +52,13 @@ const testimonies: Testimonial[] = [
     image: "/img/testimonial-5.png",
     text: "The flexible membership options and amenities like high-speed internet, printers, and meeting rooms have made this coworking space a perfect fit for my small business.",
     variant: "primary",
-    coord: "translate-x-[calc(50%+5px)] translate-y-[calc(100%+110px)]",
+    coord: "translateX(calc(50% + 5px)) translateY(calc(100% + 110px))",
   },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section className="flex flex-col px-4 py-18 max-sm:py-12">
+    <section className="relative z-10 flex flex-col px-4 py-18 max-sm:py-12">
       <div className="flex flex-col rounded-[2rem] max-sm:rounded-[1.5rem] gap-8 max-sm:gap-6 bg-rigid-black">
         <div className="grid items-end w-full grid-cols-12 gap-4 p-8 pt-18 text-clear-white max-sm:flex max-sm:flex-col max-sm:p-6 max-sm:items-start">
           <h2 className="sr-only">Virtual Tour</h2>
@@ -74,11 +79,27 @@ export default function TestimonialsSection() {
             <p className="heading-3">Cowork in Words</p>
           </div>
         </div>
-        <div className="w-full h-[860px] overflow-hidden relative flex flex-col items-center max-sm:hidden">
+        <motion.div
+          initial="compiled"
+          whileHover="spread"
+          animate="compiled"
+          className="w-full h-[860px] overflow-hidden relative flex flex-col items-center max-sm:hidden"
+        >
           {testimonies.map((testimony, index) => (
-            <div
+            <motion.div
+              variants={{
+                compiled: {
+                  rotate: 0,
+                  transform: `translateX(${30 * (index - 2)}px) translateY(${
+                    30 * (index + 2)
+                  }px) rotate(${5 * (index - 2)}deg)`,
+                },
+                spread: {
+                  transform: `${testimony.coord} rotate(0deg)`,
+                },
+              }}
               key={index}
-              className={"absolute w-[360px] top-0 " + testimony.coord}
+              className={"absolute w-[360px] top-0 "}
             >
               <TestimonialCard
                 name={testimony.name}
@@ -87,10 +108,10 @@ export default function TestimonialsSection() {
                 text={testimony.text}
                 variant={testimony.variant}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
-        <div className="flex flex-col gap-4">
+        </motion.div>
+        <div className="flex flex-col gap-4 sm:hidden">
           <div className="flex justify-end gap-4">
             <button>
               <span className="sr-only">Previous</span>
@@ -146,7 +167,20 @@ function TestimonialCard({
   variant,
 }: TestimonialCardProps) {
   return (
-    <div
+    <motion.div
+      drag
+      dragSnapToOrigin
+      animate={{
+        cursor: "grab",
+      }}
+      whileDrag={{
+        cursor: "grabbing",
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 50,
+      }}
       className={
         "flex flex-col items-center gap-6 p-8 rounded-[1.5rem] max-sm:rounded-[1rem] max-sm:py-4 max-sm:px-6 max-sm:w-full" +
         " " +
@@ -159,6 +193,6 @@ function TestimonialCard({
         <p className="subtitle">{name}</p>
         <p className="paragraph-small">{position}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

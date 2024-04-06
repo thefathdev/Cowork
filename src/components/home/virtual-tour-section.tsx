@@ -1,8 +1,11 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Button from "../ui/button";
 
 export default function VirtualTourSection() {
   return (
-    <section className="flex flex-col px-4 py-18 max-sm:py-12">
+    <section className="relative z-10 flex flex-col px-4 py-18 max-sm:py-12">
       <div className="flex flex-col rounded-[2rem] max-sm:rounded-[1.5rem] gap-8 max-sm:gap-0 bg-flexing-blue">
         <div className="grid items-end w-full grid-cols-12 gap-4 p-8 pt-18 max-sm:p-6 max-sm:flex max-sm:flex-col max-sm:items-start">
           <h2 className="sr-only">Virtual Tour</h2>
@@ -30,7 +33,25 @@ export default function VirtualTourSection() {
             </div>
           </div>
         </div>
-        <div className="relative w-full max-sm:h-[320px] aspect-video rounded-[2rem] max-sm:rounded-[1.5rem] overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView={"visible"}
+          variants={{
+            hidden: { opacity: 0, y: 200 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                type: "spring",
+                stiffness: 400,
+                damping: 60,
+                mass: 1.5,
+              },
+            },
+          }}
+          viewport={{ once: true }}
+          className="relative w-full max-sm:h-[320px] aspect-video rounded-[2rem] max-sm:rounded-[1.5rem] overflow-hidden"
+        >
           <div className="absolute z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-sm:scale-50">
             <PlayButton />
           </div>
@@ -43,7 +64,7 @@ export default function VirtualTourSection() {
             alt=""
             className="relative max-sm:object-cover max-sm:h-full"
           />
-        </div>
+        </motion.div>
         <div className="flex w-full flex-col gap-6 p-6 sm:hidden">
           <p className=" text-clear-white">
             Our immersive 📺 video tour gives you a sneak peek into the vibrant

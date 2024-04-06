@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function FaqAccordion() {
-  let [isOpen, setIsOpen] = useState(false);
+export default function FaqAccordion({ open = false }: { open?: boolean }) {
+  let [isOpen, setIsOpen] = useState(open);
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
 
   return (
-    <article className="flex flex-col gap-4 p-8 rounded-[2rem] border border-rigid-black">
+    <article
+      style={{
+        maxHeight: isOpen ? "100%" : "0",
+        overflow: "hidden",
+        transition: "max-height 0.6s ease-out",
+      }}
+      className="flex flex-col justify-center px-8 py-10 rounded-[2rem] max-sm:rounded-[1.5rem] border border-rigid-black"
+    >
       <button
         onClick={() => setIsOpen((isOpen) => !isOpen)}
-        className="flex justify-between"
+        className="flex justify-between items-center"
       >
-        <span className="paragraph-strong">
+        <span className="paragraph-strong max-sm:text-start">
           How flexible are Cowork&apos;s membership plans?
         </span>
         <div
@@ -22,13 +34,37 @@ export default function FaqAccordion() {
           <Caret />
         </div>
       </button>
-      {isOpen ? (
-        <p className="max-w-prose">
-          Frequently asked questions ordered by popularity. Remember that if the
-          visitor has not committed to the call to action, they may still have
-          questions (doubts) that can be answered.
-        </p>
-      ) : null}
+      <div className="overflow-hidden">
+        <AnimatePresence>
+          {isOpen ? (
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: -100,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -100,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 40,
+                mass: 0.5,
+              }}
+              className="max-w-prose mt-4"
+            >
+              Frequently asked questions ordered by popularity. Remember that if
+              the visitor has not committed to the call to action, they may
+              still have questions (doubts) that can be answered.
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </div>
     </article>
   );
 }

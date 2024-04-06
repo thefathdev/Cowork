@@ -1,8 +1,21 @@
+"use client";
+
+import { useInView } from "framer-motion";
 import FaqAccordion from "./faq-accordion";
+import { useRef } from "react";
 
 export default function FaqSection() {
+  let target = useRef(null);
+  const isInview = useInView(target, {
+    once: true,
+    margin: "-400px",
+  });
+
   return (
-    <section className="grid grid-cols-12 gap-4 px-4 py-18 max-sm:py-12 max-sm:gap-8 max-sm:flex max-sm:flex-col">
+    <section
+      ref={target}
+      className="grid grid-cols-12 gap-4 px-4 py-18 max-sm:py-12 max-sm:gap-8 max-sm:flex max-sm:flex-col"
+    >
       <div className="flex flex-col justify-between w-full h-full col-span-4 gap-8">
         <div className="flex flex-col gap-4">
           <p className="subtitle text-flexing-blue">
@@ -17,7 +30,7 @@ export default function FaqSection() {
         </p>
       </div>
       <div className="flex flex-col col-span-8 gap-4">
-        <FaqAccordion />
+        <FaqAccordion open={isInview} />
         <FaqAccordion />
         <FaqAccordion />
         <FaqAccordion />

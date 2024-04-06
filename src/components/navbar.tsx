@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Button from "./ui/button";
 
 export default function Navbar() {
@@ -18,7 +19,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="relative z-30 flex items-center px-4 pt-6 max-sm:pt-4 mix-blend-difference">
+      <div className="relative z-30 flex items-center px-4 pt-6 max-sm:pt-4 mix-blend-difference overflow-y-hidden">
         <nav className="flex items-center justify-between w-full py-4 max-sm:py-3 border-t border-b border-rigid-black">
           <a href="/">
             <span className="sr-only">Home</span>
@@ -29,7 +30,20 @@ export default function Navbar() {
             />
           </a>
           <div className="flex w-auto gap-12 max-sm:hidden">
-            <ul className="flex items-center gap-12">
+            <motion.ul
+              initial={{
+                y: 100,
+              }}
+              animate={{
+                y: 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 70,
+              }}
+              className="flex items-center gap-12"
+            >
               <li>
                 <a href="/">About</a>
               </li>
@@ -42,7 +56,7 @@ export default function Navbar() {
               <li>
                 <a href="/">Events</a>
               </li>
-            </ul>
+            </motion.ul>
             <div className="flex gap-6">
               <Button type={"secondary"}>Log In</Button>
               <Button>Sign Up</Button>
