@@ -107,6 +107,7 @@ export default function TestimonialsSection() {
                 image={testimony.image}
                 text={testimony.text}
                 variant={testimony.variant}
+                drag={true}
               />
             </motion.div>
           ))}
@@ -148,6 +149,7 @@ type TestimonialCardProps = {
   text: string;
   variant: "primary" | "secondary";
   coord?: string;
+  drag?: boolean;
 };
 
 const testimonialCardVariant = cva([], {
@@ -165,16 +167,17 @@ function TestimonialCard({
   image,
   text,
   variant,
+  drag = false,
 }: TestimonialCardProps) {
   return (
     <motion.div
-      drag
-      dragSnapToOrigin
+      drag={drag}
+      dragSnapToOrigin={drag}
       animate={{
-        cursor: "grab",
+        cursor: drag ? "grab" : "auto",
       }}
       whileDrag={{
-        cursor: "grabbing",
+        cursor: drag ? "grabbing" : "auto",
       }}
       transition={{
         type: "spring",

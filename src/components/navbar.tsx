@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import Button from "./ui/button";
 
 export default function Navbar() {
@@ -70,32 +70,107 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
-      {isMobileMenuOpen ? <MobileMenu /> : null}
+      <AnimatePresence>
+        {isMobileMenuOpen ? <MobileMenu /> : null}
+      </AnimatePresence>
     </>
   );
 }
 
 const MobileMenu = () => {
   return (
-    <div className="fixed sm:hidden flex flex-col justify-between pt-18 z-20 top-0 left-0 w-full h-screen bg-rigid-black text-clear-white">
-      <ul className="py-6 px-4 flex flex-col gap-8 heading-2">
-        <li>
-          <a href="/">About</a>
-        </li>
-        <li>
-          <a href="/">Pricing</a>
-        </li>
-        <li>
-          <a href="/">Blog</a>
-        </li>
-        <li>
-          <a href="/">Events</a>
-        </li>
-      </ul>
-      <div className="flex gap-6 px-4 py-6 justify-end">
+    <div className="fixed sm:hidden flex flex-col justify-between pt-18 z-20 top-0 left-0 w-full h-screen text-clear-white">
+      <motion.div
+        className="absolute top-0 bottom-0 left-0 right-0 bg-rigid-black"
+        initial={{
+          y: "-120%",
+        }}
+        animate={{
+          y: 0,
+        }}
+        exit={{
+          y: "-120%",
+          transition: {
+            delay: 0.6,
+          },
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 40,
+          mass: 1.5,
+        }}
+      ></motion.div>
+      <motion.ul
+        transition={{
+          delayChildren: 0.15,
+        }}
+        className="relative py-6 px-4 flex flex-col gap-8 heading-2"
+      >
+        {["About", "Pricing", "Blog", "Events"].map((item, index, arr) => (
+          <motion.li
+            key={index}
+            variants={{
+              hidden: {
+                x: -100,
+                opacity: 0,
+                transition: {
+                  delay: (arr.length - index) * 0.15,
+                },
+              },
+              visible: {
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: index * 0.15,
+                },
+              },
+            }}
+            initial={"hidden"}
+            animate={"visible"}
+            exit={"hidden"}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 40,
+              mass: 0.5,
+            }}
+          >
+            <a href="/">{item}</a>
+          </motion.li>
+        ))}
+      </motion.ul>
+      <motion.div
+        variants={{
+          hidden: {
+            x: -100,
+            opacity: 0,
+            transition: {
+              delay: 0,
+            },
+          },
+          visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+              delay: 0.4,
+            },
+          },
+        }}
+        initial={"hidden"}
+        animate={"visible"}
+        exit={"hidden"}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 40,
+          mass: 0.5,
+        }}
+        className="relative flex gap-6 px-4 py-6 justify-end"
+      >
         <Button type={"secondary"}>Sign Up</Button>
         <Button>Log In</Button>
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -106,19 +181,48 @@ const Hamburger = ({ isOpen }: { isOpen: boolean }) => {
       aria-hidden
       className="relative flex flex-col w-6 h-[18px] items-center"
     >
-      {isOpen ? (
-        <>
-          <span className="absolute top-2 -rotate-45 w-6 h-[2px] rounded-full bg-clear-white"></span>
-          <span className="absolute top-2 w-0 h-[2px] rounded-full bg-clear-white"></span>
-          <span className="absolute top-2 rotate-45 w-6 h-[2px] rounded-full bg-clear-white"></span>
-        </>
-      ) : (
-        <>
-          <span className="absolute top-0 w-6 h-[2px] rounded-full bg-clear-white"></span>
-          <span className="absolute top-2 w-6 h-[2px] rounded-full bg-clear-white"></span>
-          <span className="absolute top-4 w-6 h-[2px] rounded-full bg-clear-white"></span>
-        </>
-      )}
+      <MotionConfig
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 40,
+          mass: 1,
+        }}
+      >
+        <motion.span
+          initial={false}
+          style={{
+            transformOrigin: "50% 50%",
+          }}
+          animate={{
+            rotate: isOpen ? -45 : 0,
+            top: isOpen ? 8 : 0,
+          }}
+          className="absolute  w-6 h-[2px] rounded-full bg-clear-white"
+        />
+        <motion.span
+          style={{
+            transformOrigin: "50% 50%",
+          }}
+          initial={false}
+          animate={{
+            scaleX: isOpen ? 0.1 : 1,
+            top: 8,
+          }}
+          className="absolute w-6 h-[2px] rounded-full bg-clear-white"
+        />
+        <motion.span
+          initial={false}
+          style={{
+            transformOrigin: "50% 50%",
+          }}
+          animate={{
+            rotate: isOpen ? 45 : 0,
+            top: isOpen ? 8 : 16,
+          }}
+          className="absolute   w-6 h-[2px] rounded-full bg-clear-white"
+        />
+      </MotionConfig>
     </div>
   );
 };

@@ -30,7 +30,7 @@ export default function StatisticsSection() {
   return (
     <section
       ref={target}
-      className="relative flex px-4 py-18 items-center gap-8  max-sm:py-18 max-sm:flex-col max-sm:overflow-x-hidden"
+      className="relative flex px-4 py-18 items-center gap-8  max-sm:py-18 max-sm:flex-col  overflow-hidden"
     >
       <div className="relative z-10 flex flex-col w-full gap-8 text-flexing-blue">
         <div className="flex flex-col gap-4">
@@ -83,18 +83,22 @@ export default function StatisticsSection() {
           x: "-25%",
           y: (windowSize.width ?? 641) > 640 ? 0 : "-40%",
         }}
-        initial={{
-          rotate: 0,
-        }}
-        animate={{
-          rotate: 360,
-        }}
-        transition={{
-          duration: 90,
-          repeat: Infinity,
-        }}
-        className="absolute w-[1600px] max-sm:hidden max-sm:w-[1240px] rounded-full aspect-square bg-tammed-yellow border-[5px] border-dashed border-flexing-blue -translate-x-1/4 max-sm:-translate-y-[40%]"
-      ></motion.div>
+        className="absolute w-full h-full"
+      >
+        <motion.div
+          initial={{
+            rotate: 0,
+          }}
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 90,
+            repeat: Infinity,
+          }}
+          className="absolute w-[1600px] max-sm:hidden max-sm:w-[1240px] rounded-full aspect-square bg-tammed-yellow border-[5px] border-dashed border-flexing-blue "
+        ></motion.div>
+      </motion.div>
     </section>
   );
 }
